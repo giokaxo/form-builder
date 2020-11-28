@@ -1,6 +1,6 @@
 <template>
   <div class="control-wrapper d-flex p-2">
-    <button class="control-wrapper__button d-flex flex-center border-0 bg-transparent cursor-grab px-2 mr-2">
+    <button class="control-wrapper__button control-wrapper__button--handle d-flex flex-center border-0 bg-transparent cursor-grab px-2 mr-2">
       <img class="control-wrapper__handle" src="@/assets/images/grid-icon.png" alt="Move to rearrange" title="Move to rearrange" />
     </button>
 

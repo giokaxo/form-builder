@@ -4,12 +4,18 @@
       There is no form controls yet, <br />
       Press <strong>Add</strong> button and start building form.
     </h4>
-    <component v-for="item in formControls" :key="item.id" :is="item.component" v-bind="getAttrs(item)" />
+    <Draggable v-model="formControls" handle=".control-wrapper__button--handle">
+      <transition-group>
+        <component v-for="item in formControls" :key="item.id" :is="item.component" v-bind="getAttrs(item)" />
+      </transition-group>
+    </Draggable>
     <InsertButton @insert="appendComponent($event)" />
   </div>
 </template>
 
 <script>
+import Draggable from 'vuedraggable';
+
 import { CANVAS_SIZES } from '@/constants';
 import { formControlFactory } from '@/utils';
 
@@ -22,6 +28,7 @@ const DropdownBasic = () => import('@/components/FormBuilder/FormControls/Dropdo
 export default {
   name: 'TheCanvas',
   components: {
+    Draggable,
     InsertButton,
     InputBasic,
     CheckboxBasic,
