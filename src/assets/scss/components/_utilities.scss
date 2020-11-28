@@ -1,0 +1,11 @@
+@each $type in $list-style-types  {
+  .list-style-#{$type} {
+    list-style: $type;
+  }
+}
+
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}

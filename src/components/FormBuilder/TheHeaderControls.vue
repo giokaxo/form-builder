@@ -1,6 +1,6 @@
 <template>
   <div class="header-controls position-fixed px-3">
-    <ul class="d-flex h-100 align-items-center p-0 m-0">
+    <ul class="d-flex h-100 align-items-center p-0 m-0 list-style-none">
       <li class="header-control" v-for="(value, key) in CANVAS_SIZES" :key="key">
         <button
           class="btn btn-sm text-capitalize mr-2"
@@ -48,9 +48,5 @@ export default {
   background-color: #bbb;
   width: 100%;
   height: var(--header-controls-height);
-}
-
-.header-control {
-  list-style: none;
 }
 </style>

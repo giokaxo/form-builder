@@ -1,18 +1,50 @@
 <template>
-  <div :class="`canvas canvas--${size}`"></div>
+  <div :class="`canvas canvas--${size} p-3`">
+    <component v-for="item in formControls" :key="item.id" :is="item.component" v-bind="getAttrs(item)" />
+    <InsertButton @insert="appendComponent($event)" />
+  </div>
 </template>
 
 <script>
 import { CANVAS_SIZES } from '@/constants';
+import { formControlFactory } from '@/utils';
+
+import InsertButton from '@/components/FormBuilder/InsertButton.vue';
+
+const InputBasic = () => import('@/components/FormBuilder/FormControls/InputBasic.vue');
+const CheckboxBasic = () => import('@/components/FormBuilder/FormControls/CheckboxBasic.vue');
+const DropdownBasic = () => import('@/components/FormBuilder/FormControls/DropdownBasic.vue');
 
 export default {
   name: 'TheCanvas',
+  components: {
+    InsertButton,
+    InputBasic,
+    CheckboxBasic,
+    DropdownBasic,
+  },
+  data() {
+    return {
+      formControls: [],
+    };
+  },
   props: {
     size: {
       type: String,
       validator(value) {
         return Object.values(CANVAS_SIZES).includes(value);
       },
+    },
+  },
+  methods: {
+    appendComponent(type) {
+      this.formControls.push(formControlFactory(type));
+    },
+    getAttrs(item) {
+      const predefinedAttrs = ['component'];
+      return Object.keys(item)
+        .filter(key => !predefinedAttrs.includes(key))
+        .reduce((obj, key) => ({ ...obj, [key]: item[key] }), {});
     },
   },
 };
