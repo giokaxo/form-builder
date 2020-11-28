@@ -37,11 +37,25 @@ export default {
     },
   },
   methods: {
+    /**
+     * Add new component to
+     * formcontrols list
+     *
+     * @param {string}
+     * @returns {void}
+     */
     appendComponent(type) {
       this.formControls.push(formControlFactory(type));
     },
+    /**
+     * Get filtered attributes object
+     * to pass props
+     *
+     * @param {object} item
+     * @returns {object}
+     */
     getAttrs(item) {
-      const predefinedAttrs = ['component'];
+      const predefinedAttrs = ['component', 'id'];
       return Object.keys(item)
         .filter(key => !predefinedAttrs.includes(key))
         .reduce((obj, key) => ({ ...obj, [key]: item[key] }), {});

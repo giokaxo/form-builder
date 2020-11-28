@@ -4,7 +4,7 @@
       <img class="insert-button__icon" :src="require('@/assets/images/plus-icon.svg')" />
     </button>
     <transition name="fade">
-      <ul v-show="showList" class="insert-button__list position-absolute rounded-lg p-0 list-style-none overflow-hidden">
+      <ul v-show="showList" class="insert-button__list position-absolute p-0 list-style-none">
         <li class="control-list-item" v-for="item in componentTypes" :key="item.type">
           <button class="bg-transparent d-flex align-items-center w-100 px-3 py-1 border-0 text-capitalize" @click="addComponent(item.type)">
             <img class="control-list-item__icon mr-2" :src="item.icon" :title="item.name" :alt="item.name" />
@@ -87,6 +87,19 @@ export default {
     left: 50%;
     border: 1px solid var(--secondary);
     transform: translateX(-50%);
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: -7px;
+      width: 0;
+      height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 7px solid var(--secondary);
+      transform: translateX(-50%);
+    }
   }
 }
 
