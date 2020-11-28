@@ -1,0 +1,5 @@
+:root {
+  @each $var, $value in $variables {
+    --#{$var}: #{$value};
+  }
+}
