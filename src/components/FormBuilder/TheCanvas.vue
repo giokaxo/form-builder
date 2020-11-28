@@ -1,5 +1,9 @@
 <template>
-  <div :class="`canvas canvas--${size} p-3`">
+  <div :class="`canvas canvas--${size} px-3 py-4`">
+    <h4 class="text-center font-weight-normal" v-if="formControls.length === 0">
+      There is no form controls yet, <br />
+      Press <strong>Add</strong> button and start building form.
+    </h4>
     <component v-for="item in formControls" :key="item.id" :is="item.component" v-bind="getAttrs(item)" />
     <InsertButton @insert="appendComponent($event)" />
   </div>
