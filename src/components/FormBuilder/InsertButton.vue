@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-center position-relative">
+  <div class="d-flex flex-center position-relative mx-auto" v-click-outside="hideList">
     <button class="insert-button mt-3 mx-auto p-2 rounded-lg border-0" @click="toggleList()">
       <img class="insert-button__icon" :src="require('@/assets/images/plus-icon.svg')" />
     </button>
@@ -17,10 +17,15 @@
 </template>
 
 <script>
+import clickOutside from 'vue-click-outside';
+
 import { FORM_CONTROL_TYPES } from '@/constants';
 
 export default {
   name: 'InsertButton',
+  directives: {
+    clickOutside,
+  },
   data() {
     return {
       showList: false,
@@ -53,13 +58,21 @@ export default {
       this.showList = !this.showList;
     },
     /**
+     * Explicitly hide list
+     *
+     * @returns {void}
+     */
+    hideList() {
+      this.showList = false;
+    },
+    /**
      * Insert new block
      *
      * @param {string} type
      * @returns {void}
      */
     addComponent(type) {
-      this.showList = false;
+      this.hideList();
       this.$emit('insert', type);
     },
   },
