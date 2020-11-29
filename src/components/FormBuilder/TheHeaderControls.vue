@@ -48,5 +48,6 @@ export default {
   background-color: #bbb;
   width: 100%;
   height: var(--header-controls-height);
+  z-index: 100;
 }
 </style>

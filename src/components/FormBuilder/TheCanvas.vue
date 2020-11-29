@@ -6,7 +6,7 @@
     </h4>
     <Draggable v-model="formControls" handle=".control-wrapper__button--handle">
       <transition-group>
-        <component v-for="item in formControls" :key="item.id" :is="item.component" v-bind="getAttrs(item)" />
+        <component v-for="item in formControls" :key="item.id" :is="item.component" v-bind="getAttrs(item)" @remove="removeFormControl(item.id)" />
       </transition-group>
     </Draggable>
     <InsertButton @insert="appendComponent($event)" />
@@ -70,6 +70,16 @@ export default {
       return Object.keys(item)
         .filter(key => !predefinedAttrs.includes(key))
         .reduce((obj, key) => ({ ...obj, [key]: item[key] }), {});
+    },
+    /**
+     * Remove form control
+     * from form control list
+     *
+     * @param {number} itemId
+     * @returns {void}
+     */
+    removeFormControl(itemId) {
+      this.formControls = this.formControls.filter(({ id }) => id !== itemId);
     },
   },
 };
